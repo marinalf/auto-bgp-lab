@@ -1,0 +1,53 @@
+
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+
+networking:
+  ipFamily: dual
+  disableDefaultCNI: true
+  podSubnet: "10.0.0.0/16,2001:1::/64"
+  serviceSubnet: "10.1.0.0/16,2001:10::/108"
+nodes:
+  - role: control-plane
+    extraPortMappings:
+    - containerPort: 31235
+      hostPort: 31235
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "10.0.0.2"
+            node-labels: "rack=rack1"
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "10.0.1.2"
+            node-labels: "rack=rack1"
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "10.0.2.2"
+            node-labels: "rack=rack2"
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "10.0.3.2"
+            node-labels: "rack=rack3"
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-ip: "10.0.4.2"
+            node-labels: "rack=rack3"

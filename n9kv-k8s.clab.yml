@@ -1,0 +1,116 @@
+
+#          Spine & Leaf Topology 
+#               
+#            +------+  +------+
+#            |      |  |      |
+#            |  S1  |  |  S2  |         
+#            |      |  |      |
+#            +------+  +------+
+#              |  |      |  |
+#    +---------+  |      |  +----------+
+#    | +-------+--+------+--+-------+  |
+#    | |       |  |      |  |       |  |
+#  +----+     +----+    +----+     +----+
+#  |    |     |    |    |    |     |    |
+#  | L1 |     | L2 |    | L3 |     | L4 | 
+#  |    |     |    |    |    |     |    |
+#  +----+     +----+    +----+     +----+
+#
+#
+
+name: n9kv-k8s
+
+mgmt:
+  network: clab_mgmt_net
+  ipv4-subnet: 172.20.1.0/24
+  bridge: mybridge
+
+topology:
+  defaults:
+    kind: cisco_n9kv
+  kinds: 
+    cisco_n9kv:
+      image: vrnetlab/cisco_n9kv:lite.10.5.2.F
+      env:
+        QEMU_MEMORY: 6144 # N9kv-lite requires minimum 6GB memory
+        QEMU_SMP: 2 # N9kv-lite requires minimum 2 CPUs
+        CLAB_MGMT_PASSTHROUGH: "true" # support for different management IP
+
+# Nexus 9k Auto-BGP fabric
+
+  nodes:
+    leaf1:
+      mgmt-ipv4: 172.20.1.101
+      startup-config: leaf1.txt
+    leaf2:
+      mgmt-ipv4: 172.20.1.102
+      startup-config: leaf2.txt
+    leaf3:
+      mgmt-ipv4: 172.20.1.103
+      startup-config: leaf3.txt
+    leaf4:
+      mgmt-ipv4: 172.20.1.104
+      startup-config: leaf4.txt
+    spine1:
+      mgmt-ipv4: 172.20.1.105
+      startup-config: spine1.txt
+    spine2:
+      mgmt-ipv4: 172.20.1.106
+      startup-config: spine2.txt
+
+# K8s Nodes
+
+    k8s:
+      kind: k8s-kind
+      startup-config: cluster.yaml
+      
+    k8s-control-plane:
+      kind: ext-container
+      exec:
+        - "ip addr add dev eth1 10.0.0.2/24"
+        - "ip route replace default via 10.0.0.1"
+    k8s-worker:
+      kind: ext-container
+      exec:
+        - "ip addr add dev eth1 10.0.1.2/24"
+        - "ip route replace default via 10.0.1.1"
+    k8s-worker2:
+      kind: ext-container
+      exec:
+        - "ip addr add dev eth1 10.0.2.2/24"
+        - "ip route replace default via 10.0.2.1"
+    k8s-worker3:
+      kind: ext-container
+      exec:
+        - "ip addr add dev eth1 10.0.3.2/24"
+        - "ip route replace default via 10.0.3.1"
+    k8s-worker4:
+      kind: ext-container
+      exec:
+        - "ip addr add dev eth1 10.0.4.2/24"
+        - "ip route replace default via 10.0.4.1"
+
+# leaf to spine
+
+  links:
+    - endpoints: ["leaf1:Ethernet1/1", "spine1:Ethernet1/1"]
+    - endpoints: ["leaf1:Ethernet1/2", "spine2:Ethernet1/1"]
+
+    - endpoints: ["leaf2:Ethernet1/1", "spine1:Ethernet1/2"]
+    - endpoints: ["leaf2:Ethernet1/2", "spine2:Ethernet1/2"]
+
+    - endpoints: ["leaf3:Ethernet1/1", "spine1:Ethernet1/3"]
+    - endpoints: ["leaf3:Ethernet1/2", "spine2:Ethernet1/3"]
+
+    - endpoints: ["leaf4:Ethernet1/1", "spine1:Ethernet1/4"]
+    - endpoints: ["leaf4:Ethernet1/2", "spine2:Ethernet1/4"]
+
+# leaf to K8s nodes
+
+    - endpoints: ["leaf1:Ethernet1/6", "k8s-control-plane:eth1"]
+    - endpoints: ["leaf1:Ethernet1/7", "k8s-worker:eth1"]
+
+    - endpoints: ["leaf3:Ethernet1/6", "k8s-worker2:eth1"]
+
+    - endpoints: ["leaf4:Ethernet1/6", "k8s-worker3:eth1"]
+    - endpoints: ["leaf4:Ethernet1/7", "k8s-worker4:eth1"]

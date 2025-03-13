@@ -1,0 +1,25 @@
+feature bgp 
+
+route-map TAG permit 10
+  match tag 12345 
+
+  router bgp auto
+  router-id auto
+  address-family ipv4 unicast
+    redistribute direct route-map TAG
+  address-family ipv6 unicast
+    redistribute direct route-map TAG
+  neighbor ethernet 1/1 - 2
+    remote-as external
+    address-family ipv4 unicast
+    address-family ipv6 unicast
+
+interface loopback0
+  ip address 10.32.32.32/32 tag 12345
+  ipv6 address 2001::32/128 tag 12345
+
+  interface ethernet 1/1-2
+    no switchport
+    ip forward
+    ipv6 link-local use-bia
+    no shutdown
