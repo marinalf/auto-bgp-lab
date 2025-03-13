@@ -41,22 +41,22 @@ topology:
   nodes:
     leaf1:
       mgmt-ipv4: 172.20.1.101
-      startup-config: leaf1.txt
+      startup-config: config/leaf1.txt
     leaf2:
       mgmt-ipv4: 172.20.1.102
-      startup-config: leaf2.txt
+      startup-config: config/leaf2.txt
     leaf3:
       mgmt-ipv4: 172.20.1.103
-      startup-config: leaf3.txt
+      startup-config: config/leaf3.txt
     leaf4:
       mgmt-ipv4: 172.20.1.104
-      startup-config: leaf4.txt
+      startup-config: config/leaf4.txt
     spine1:
       mgmt-ipv4: 172.20.1.105
-      startup-config: spine1.txt
+      startup-config: config/spine1.txt
     spine2:
       mgmt-ipv4: 172.20.1.106
-      startup-config: spine2.txt
+      startup-config: config/spine2.txt
 
 # K8s Nodes
 
