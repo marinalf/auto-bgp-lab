@@ -52,7 +52,7 @@ spec:
 
 ---
 apiVersion: isovalent.com/v1
-kind: CiliumBGPPeerConfig
+kind: IsovalentBGPPeerConfig
 metadata:
   name: peer-config
 spec:
@@ -65,23 +65,26 @@ spec:
       safi: unicast
       advertisements:
         matchLabels:
-          advertise: "pod-cidr"
+          advertise: "bgp"
     - afi: ipv6
       safi: unicast
       advertisements:
         matchLabels:
-          advertise: "pod-cidr"
-
+          advertise: "bgp"
 ---
 apiVersion: isovalent.com/v1
-kind: CiliumBGPAdvertisement
+kind: IsovalentBGPAdvertisement
 metadata:
-  name: pod-cidr-advert
+  name: bgp-advertisements
   labels:
-    advertise: pod-cidr
+    advertise: bgp
 spec:
   advertisements:
     - advertisementType: "PodCIDR"
       attributes:
         communities:
           wellKnown: [ "no-export" ]
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - ExternalIP
