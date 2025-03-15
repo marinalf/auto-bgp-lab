@@ -28,4 +28,5 @@ interface loopback0
     description w-node3
     no switchport
     ip address 10.0.2.1/24
+    ipv6 link-local fe80:10:0:2::1
     no shutdown

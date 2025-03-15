@@ -67,28 +67,38 @@ topology:
     k8s-control-plane:
       kind: ext-container
       exec:
-        - "ip addr add dev eth1 10.0.0.2/24"
-        - "ip route replace default via 10.0.0.1"
+        - ip addr add dev eth1 10.0.0.2/24
+        - ip addr add dev eth1 fe80:10:0:0::2/64
+        - ip route replace default via 10.0.0.1
+        - ip route replace default via fe80:10:0:0::1
     k8s-worker:
       kind: ext-container
       exec:
-        - "ip addr add dev eth1 10.0.1.2/24"
-        - "ip route replace default via 10.0.1.1"
+        - ip addr add dev eth1 10.0.1.2/24
+        - ip addr add dev eth1 fe80:10:0:1::2/64
+        - ip route replace default via 10.0.1.1
+        - ip route replace default via fe80:10:0:1::1
     k8s-worker2:
       kind: ext-container
       exec:
-        - "ip addr add dev eth1 10.0.2.2/24"
-        - "ip route replace default via 10.0.2.1"
+        - ip addr add dev eth1 10.0.2.2/24
+        - ip addr add dev eth1 fe80:10:0:2::2/64
+        - ip route replace default via 10.0.2.1
+        - ip route replace default via fe80:10:0:2::1
     k8s-worker3:
       kind: ext-container
       exec:
-        - "ip addr add dev eth1 10.0.3.2/24"
-        - "ip route replace default via 10.0.3.1"
+        - ip addr add dev eth1 10.0.3.2/24
+        - ip addr add dev eth1 fe80:10:0:3::2/64
+        - ip route replace default via 10.0.3.1
+        - ip route replace default via fe80:10:0:3::1
     k8s-worker4:
       kind: ext-container
       exec:
-        - "ip addr add dev eth1 10.0.4.2/24"
-        - "ip route replace default via 10.0.4.1"
+        - ip addr add dev eth1 10.0.4.2/24
+        - ip addr add dev eth1 fe80:10:0:4::2/64
+        - ip route replace default via 10.0.4.1
+        - ip route replace default via fe80:10:0:4::1
 
 # leaf to spine
 

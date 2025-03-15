@@ -4,8 +4,10 @@ kind: Cluster
 networking:
   ipFamily: dual
   disableDefaultCNI: true
-  podSubnet: "10.0.0.0/16,2001:1::/64"
-  serviceSubnet: "10.1.0.0/16,2001:10::/108"
+  podSubnet: "10.1.0.0/16,fd00:10:1::/63"
+  serviceSubnet: "10.2.0.0/16,fd00:10:2::/108"
+  apiServerAddress: "0.0.0.0"
+  apiServerPort: 6443
 nodes:
   - role: control-plane
     extraPortMappings:
@@ -16,7 +18,7 @@ nodes:
         kind: InitConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.0.2"
+            node-ip: "10.0.0.2,fe80:10:0:0::2"
             node-labels: "rack=rack1"
   - role: worker
     kubeadmConfigPatches:
@@ -24,7 +26,7 @@ nodes:
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.1.2"
+            node-ip: "10.0.1.2,fe80:10:0:1::2"
             node-labels: "rack=rack1"
   - role: worker
     kubeadmConfigPatches:
@@ -32,7 +34,7 @@ nodes:
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.2.2"
+            node-ip: "10.0.2.2,fe80:10:0:2::2"
             node-labels: "rack=rack2"
   - role: worker
     kubeadmConfigPatches:
@@ -40,7 +42,7 @@ nodes:
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.3.2"
+            node-ip: "10.0.3.2,fe80:10:0:3::2"
             node-labels: "rack=rack3"
   - role: worker
     kubeadmConfigPatches:
@@ -48,5 +50,5 @@ nodes:
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.4.2"
+            node-ip: "10.0.4.2,fe80:10:0:4::2"
             node-labels: "rack=rack3"

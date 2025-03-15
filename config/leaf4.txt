@@ -28,10 +28,12 @@ interface loopback0
     description w-node4
     no switchport
     ip address 10.0.3.1/24
+    ipv6 link-local fe80:10:0:3::1
     no shutdown
 
   interface ethernet 1/7
     description w-node5
     no switchport
     ip address 10.0.4.1/24
+    ipv6 link-local fe80:10:0:4::1
     no shutdown
