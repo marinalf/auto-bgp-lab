@@ -1,5 +1,5 @@
-# Add helm repo for Cilium: helm repo add isovalent https://helm.isovalent.com
-# Install Cilium with Helm: helm install cilium isovalent/cilium --version <add version here> --namespace kube-system -f values.yaml
+# Add helm repo for Cilium: helm repo add cilium https://helm.cilium.io
+# Install Cilium with Helm: helm install cilium isovalent/cilium --version v1.17.1-cee.beta.1 --namespace kube-system -f cilium-enterprise-values.yaml
 
 debug:
   enabled: true
