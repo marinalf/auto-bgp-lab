@@ -74,7 +74,7 @@ topology:
 **Cilium CNI**
 
 2) Add helm repo for Cilium: ```helm repo add cilium https://helm.cilium.io```
-3) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f values.yaml```. 
+3) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```. 
 4) Deploy Cilium CLI: ```./cilium-cli.sh```, and ensure file has the right permission [chmod +x ./cilium-cli.sh]
 
 **Auto-BGP Fabric**
@@ -98,7 +98,7 @@ show ip bgp summary
 * kind get clusters
 * kubectl version
 * kubectl cluster-info --context kind-k8s
-* kubectl get nodes
+* kubectl get nodes -o wide
 * kubectl get pod -n kube-system
 * kubectl get pods -A
 * kubectl config view
@@ -109,7 +109,10 @@ show ip bgp summary
 * helm repo list
 * helm list --namespace kube-system
 * cilium status
+* cilium config view | grep ipv
+* kubectl get ds -n kube-system cilium
 * cilium bgp peers
+* cilium bgp routes
 * cilium connectivity test
 
 ### Clean-Up
