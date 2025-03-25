@@ -71,7 +71,7 @@ topology:
 **K8s**
 1) Build K8s cluster: ```kind create cluster --config=cluster.yaml```
 
-**Auto-BGP Fabric**
+**Nexus Auto-BGP Fabric**
 
 2) Deploy topology file: ```containerlab deploy -t n9kv-k8s.clab.yml```. 
 
