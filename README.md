@@ -71,15 +71,15 @@ topology:
 **K8s**
 1) Build K8s cluster: ```kind create cluster --config=cluster.yaml```
 
-**Cilium CNI**
-
-2) Add helm repo for Cilium: ```helm repo add cilium https://helm.cilium.io```
-3) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```. 
-4) Deploy Cilium CLI: ```./cilium-cli.sh```, and ensure file has the right permission [chmod +x ./cilium-cli.sh]
-
 **Auto-BGP Fabric**
 
-5) Deploy topology file: ```containerlab deploy -t n9kv-k8s.clab.yml```. 
+2) Deploy topology file: ```containerlab deploy -t n9kv-k8s.clab.yml```. 
+
+**Cilium CNI**
+
+3) Add helm repo for Cilium: ```helm repo add cilium https://helm.cilium.io```
+4) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```. 
+5) Deploy Cilium CLI: ```./cilium-cli.sh```, and ensure file has the right permission [chmod +x ./cilium-cli.sh]
 
 **NOTE**: Before applying the BGP config on Cilium CNI, update the cilium-bgp.yaml file with the auto-generated AS number from the leaf switches [credentials admin/admin]
 
@@ -100,6 +100,7 @@ show ip bgp summary
 * kubectl cluster-info --context kind-k8s
 * kubectl get node k8s-control-plane -o yaml
 * kubectl get nodes -o wide
+* kubectl get pods -o wide
 * kubectl get pod -n kube-system
 * kubectl get pods -A
 * kubectl config view
@@ -112,6 +113,7 @@ show ip bgp summary
 * cilium status
 * cilium config view | grep ipv
 * kubectl get ds -n kube-system cilium
+* kubectl -n kube-system rollout restart ds/cilium
 * cilium bgp peers
 * cilium bgp routes
 * cilium connectivity test
@@ -121,3 +123,4 @@ show ip bgp summary
 
 * helm uninstall cilium -n kube-system
 * clab destroy -t n9kv-k8s.clab.yml
+* kind delete cluster -n k8s

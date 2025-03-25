@@ -75,9 +75,9 @@ topology:
       kind: ext-container
       exec:
         - ip addr add 10.0.1.2/24 dev eth1
-        - ip addr add fe80:10:0:1::2/64 dev eth1s
+        - ip addr add fe80:10:0:1::2/64 dev eth1
         - ip route add 10.0.0.0/16 via 10.0.1.1 dev eth1
-        - ip route add fe80::/64 via fe80:10:0:1::1 eth1
+        - ip route add fe80::/64 via fe80:10:0:1::1 dev eth1
     k8s-worker2:
       kind: ext-container
       exec:

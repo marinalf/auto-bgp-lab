@@ -9,7 +9,7 @@ spec:
       rack: rack1
   bgpInstances:
     - name: "cilium-rack1"
-      localASN: 4280994082 # needs to be updated with the auto-generated value from leaf1 (iBGP, AS-per rack design) 
+      localASN: 4231284008 # needs to be updated with the auto-generated value from leaf1 (iBGP, AS-per rack design) 
       peers:
         - name: "leaf1-rack1"
           interface: "fe80:10::1"
