@@ -13,7 +13,7 @@ bgpControlPlane:
   enabled: true
 
 ipv4NativeRoutingCIDR: 10.0.0.0/16
-ipv6NativeRoutingCIDR: fe80::/16
+ipv6NativeRoutingCIDR: fe80::/64
 
 ipam:
   mode: kubernetes

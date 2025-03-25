@@ -98,13 +98,14 @@ show ip bgp summary
 * kind get clusters
 * kubectl version
 * kubectl cluster-info --context kind-k8s
+* kubectl get node k8s-control-plane -o yaml
 * kubectl get nodes -o wide
 * kubectl get pod -n kube-system
 * kubectl get pods -A
 * kubectl config view
 * docker ps
 * docker images
-* docker exec -it k8s-worker4 ip a show eth1
+* docker exec -it k8s-worker4 ip a show eth0
 * docker exec -it k8s-control-plane sh
 * helm repo list
 * helm list --namespace kube-system
@@ -114,6 +115,7 @@ show ip bgp summary
 * cilium bgp peers
 * cilium bgp routes
 * cilium connectivity test
+
 
 ### Clean-Up
 

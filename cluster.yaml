@@ -6,49 +6,53 @@ networking:
   disableDefaultCNI: true
 #  podSubnet: "10.1.0.0/16,fd00:10:0::/63"
 #  serviceSubnet: "10.2.0.0/16,fd00:10:2::/108"
-#  apiServerAddress: "127.0.0.1"
+#  apiServerAddress: "127.0.0.1"s
 #  apiServerPort: 6443
 nodes:
   - role: control-plane
     extraPortMappings:
-    - containerPort: 31235
-      hostPort: 31235
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
     kubeadmConfigPatches:
       - |
         kind: InitConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.0.2,fe80:10:0:0::2"
             node-labels: "rack=rack1"
+#            node-ip: "10.0.0.2,fe80:10:0:0::2"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.1.2,fe80:10:0:1::2"
             node-labels: "rack=rack1"
+#            node-ip: "10.0.1.2,fe80:10:0:1::2"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.2.2,fe80:10:0:2::2"
             node-labels: "rack=rack2"
+ #           node-ip: "10.0.2.2,fe80:10:0:2::2"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.3.2,fe80:10:0:3::2"
             node-labels: "rack=rack3"
+  #          node-ip: "10.0.3.2,fe80:10:0:3::2"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-ip: "10.0.4.2,fe80:10:0:4::2"
             node-labels: "rack=rack3"
+  #          node-ip: "10.0.4.2,fe80:10:0:4::2"
