@@ -73,7 +73,7 @@ topology:
 
 **Nexus Auto-BGP Fabric**
 
-2) Deploy topology file: ```containerlab deploy -t n9kv-k8s.clab.yml```. 
+2) Deploy topology file: ```containerlab deploy -t n9kv-k8s.clab.yml```
 
 **Cilium CNI**
 
@@ -81,7 +81,7 @@ topology:
 4) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```. 
 5) Deploy Cilium CLI: ```./cilium-cli.sh```, and ensure file has the right permission [chmod +x ./cilium-cli.sh]
 
-**NOTE**: Before applying the BGP config on Cilium CNI, update the cilium-bgp.yaml file with the auto-generated AS number from the leaf switches [credentials admin/admin]
+**NOTE**: Before applying the BGP config on Cilium CNI, update the ```cilium-bgp.yaml``` file with the auto-generated AS number from the leaf switches [credentials admin/admin]
 
 ```
 ssh admin@clab-n9kv-k8s-leaf1
