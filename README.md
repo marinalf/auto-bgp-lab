@@ -107,7 +107,6 @@ show ip bgp summary
 * docker ps
 * docker images
 * docker exec -it k8s-worker4 ip a show eth0
-* docker start <container>
 * helm repo list
 * helm list --namespace kube-system
 * cilium status
