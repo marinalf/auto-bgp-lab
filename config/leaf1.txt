@@ -26,6 +26,9 @@ neighbor fe80:10:0:1::2
     address-family ipv6 unicast
       route-reflector-client
 
+  int mgmt0
+  no cdp enable
+
   interface loopback0
     ip address 10.31.31.31/32 tag 12345
     ipv6 address 2001::31/128 tag 12345
@@ -39,13 +42,13 @@ neighbor fe80:10:0:1::2
   interface ethernet 1/6
     description cp-node
     no switchport
-    ip address 10.0.0.1/24
+    ip forward
     ipv6 link-local fe80:10:0::1
     no shutdown
 
   interface ethernet 1/7
     description w-node1
     no switchport
-    ip address 10.0.1.1/24
+    ip forward
     ipv6 link-local fe80:10:0:1::1
     no shutdown

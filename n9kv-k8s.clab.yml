@@ -58,7 +58,7 @@ topology:
       mgmt-ipv4: 172.20.1.106
       startup-config: config/spine2.txt
 
-# K8s Nodes
+# K8s Nodes (RFC 5549 (peering with IPv6 only)
 
     k8s:
       kind: k8s-kind
@@ -67,37 +67,27 @@ topology:
     k8s-control-plane:
       kind: ext-container
       exec:
-        - ip addr add 10.0.0.2/24 dev eth1
         - ip addr add fe80:10:0:0::2/64 dev eth1
-        - ip route add 10.0.0.0/16 via 10.0.0.1 dev eth1
         - ip route add fe80::/64 via fe80:10:0::1 dev eth1
     k8s-worker:
       kind: ext-container
       exec:
-        - ip addr add 10.0.1.2/24 dev eth1
         - ip addr add fe80:10:0:1::2/64 dev eth1
-        - ip route add 10.0.0.0/16 via 10.0.1.1 dev eth1
         - ip route add fe80::/64 via fe80:10:0:1::1 dev eth1
     k8s-worker2:
       kind: ext-container
       exec:
-        - ip addr add 10.0.2.2/24 dev eth1
         - ip addr add fe80:10:0:2::2/64 dev eth1
-        - ip route add 10.0.0.0/16 via 10.0.2.1 dev eth1
         - ip route add fe80::/64 via fe80:10:0:2::1 dev eth1
     k8s-worker3:
       kind: ext-container
       exec:
-        - ip addr add 10.0.3.2/24 dev eth1
         - ip addr add fe80:10:0:3::2/64 dev eth1
-        - ip route add 10.0.0.0/16 via 10.0.3.1 dev eth1
         - ip route add fe80::/64 via fe80:10:0:3::1 dev eth1
     k8s-worker4:
       kind: ext-container
       exec:
-        - ip addr add 10.0.4.2/24 dev eth1
         - ip addr add fe80:10:0:4::2/64 dev eth1
-        - ip route add 10.0.0.0/16 via 10.0.4.1 dev eth1
         - ip route add fe80::/64 via fe80:10:0:4::1 dev eth1
 
 # leaf to spine

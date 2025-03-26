@@ -100,13 +100,13 @@ show ip bgp summary
 * kubectl cluster-info --context kind-k8s
 * kubectl get node k8s-control-plane -o yaml
 * kubectl get nodes -o wide
-* kubectl get pods -o wide
+* kubectl get pods -o wide -n kube-system
 * kubectl get pod -n kube-system -o wide
 * kubectl get pods -A
 * kubectl config view
 * docker ps
 * docker images
-* docker exec -it k8s-worker4 ip a show eth0
+* docker exec -it k8s-worker4 ip a show eth1
 * helm repo list
 * helm list --namespace kube-system
 * cilium status
