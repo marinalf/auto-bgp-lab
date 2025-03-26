@@ -29,14 +29,14 @@ route-map TAG permit 10
     no shutdown
 
   interface ethernet 1/6
-    description c-node1
+    description cp-node
     no switchport
     ip address 10.0.0.1/24
     ipv6 link-local fe80:10::1
     no shutdown
 
   interface ethernet 1/7
-    description w-node2
+    description w-node1
     no switchport
     ip address 10.0.1.1/24
     ipv6 link-local fe80:10:0:1::1

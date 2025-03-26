@@ -11,8 +11,12 @@ spec:
     - name: "cilium-rack1"
       localASN: 4231284008 # needs to be updated with the auto-generated value from leaf1 (iBGP, AS-per rack design) 
       peers:
-        - name: "leaf1-rack1"
-          interface: "fe80:10::1"
+        - name: "leaf1-cp"
+          peerAddress: "fe80:10::1"
+          peerConfigRef:
+            name: "peer-config" 
+        - name: "leaf1-node1"
+          peerAddress: "fe80:10:0:1::1"
           peerConfigRef:
             name: "peer-config" 
 
@@ -28,8 +32,8 @@ spec:
     - name: "leaf3-rack2"
       localASN: 4271156015 # needs to be updated with the auto-generated value from leaf3 (iBGP, AS-per rack design)
       peers:
-        - name: "peer-rack2"
-          interface: "fe80:10:0:2::1"
+        - name: "peer-node2"
+          peerAddress: "fe80:10:0:2::1"
           peerConfigRef:
             name: "peer-config" 
 
@@ -45,11 +49,14 @@ spec:
     - name: "leaf4-rack3"
       localASN: 4271466802 # needs to be updated with the auto-generated value from leaf4 (iBGP, AS-per rack design)
       peers:
-        - name: "peer-rack3"
-          interface: "efe80:10:0:3::1"
+        - name: "leaf4-node3"
+          peerAddress: "fe80:10:0:3::1"
           peerConfigRef:
             name: "peer-config" 
-
+        - name: "leaf4-node4"
+          peerAddress: "fe80:10:0:4::1"
+          peerConfigRef:
+            name: "peer-config" 
 ---
 apiVersion: cilium.io/v2alpha1
 kind: CiliumBGPPeerConfig
@@ -60,6 +67,10 @@ spec:
   gracefulRestart:
     enabled: true
     restartTimeSeconds: 15
+  timers:
+    connectRetryTimeSeconds: 5
+    holdTimeSeconds: 9
+    keepAliveTimeSeconds: 3
   families:
     - afi: ipv4
       safi: unicast
