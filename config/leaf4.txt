@@ -13,12 +13,18 @@ route-map TAG permit 10
     remote-as external
     address-family ipv4 unicast
     address-family ipv6 unicast
-  neighbor ethernet 1/6 - 7
+neighbor fe80:10:0:3::2
     remote-as internal
     address-family ipv4 unicast
-        route-reflector-client
+      route-reflector-client
     address-family ipv6 unicast
-        route-reflector-client
+      route-reflector-client
+neighbor fe80:10:0:4::2
+    remote-as internal
+    address-family ipv4 unicast
+      route-reflector-client
+    address-family ipv6 unicast
+      route-reflector-client
 
 interface loopback0
   ip address 10.34.34.34/32 tag 12345

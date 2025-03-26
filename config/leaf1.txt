@@ -13,12 +13,18 @@ route-map TAG permit 10
     remote-as external
     address-family ipv4 unicast
     address-family ipv6 unicast
-  neighbor ethernet 1/6 - 7
+neighbor fe80:10:0::2
     remote-as internal
-     address-family ipv4 unicast
-        route-reflector-client
+    address-family ipv4 unicast
+      route-reflector-client
     address-family ipv6 unicast
-        route-reflector-client
+      route-reflector-client
+neighbor fe80:10:0:1::2
+    remote-as internal
+    address-family ipv4 unicast
+      route-reflector-client
+    address-family ipv6 unicast
+      route-reflector-client
 
   interface loopback0
     ip address 10.31.31.31/32 tag 12345
@@ -34,7 +40,7 @@ route-map TAG permit 10
     description cp-node
     no switchport
     ip address 10.0.0.1/24
-    ipv6 link-local fe80:10::1
+    ipv6 link-local fe80:10:0::1
     no shutdown
 
   interface ethernet 1/7
