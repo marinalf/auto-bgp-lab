@@ -22,37 +22,32 @@ nodes:
         kind: InitConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "rack=rack1"
-#            node-ip: "10.0.0.2,fe80:10:0:0::2"
+            node-labels: "node=cp"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "rack=rack1"
-#            node-ip: "10.0.1.2,fe80:10:0:1::2"
+            node-labels: "node=node1"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "rack=rack2"
- #           node-ip: "10.0.2.2,fe80:10:0:2::2"
+            node-labels: "node=node2"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "rack=rack3"
-  #          node-ip: "10.0.3.2,fe80:10:0:3::2"
+            node-labels: "node=node3"
   - role: worker
     kubeadmConfigPatches:
       - |
         kind: JoinConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "rack=rack3"
-  #          node-ip: "10.0.4.2,fe80:10:0:4::2"
+            node-labels: "node=node4"

@@ -107,6 +107,7 @@ show ip bgp summary
 * docker ps
 * docker images
 * docker exec -it k8s-worker4 ip a show eth0
+* docker start <container>
 * helm repo list
 * helm list --namespace kube-system
 * cilium status
@@ -116,10 +117,11 @@ show ip bgp summary
 * cilium bgp peers
 * cilium bgp routes
 * cilium connectivity test
+* kubectl -n kube-system logs <cilium agent pod name> | grep -E "subsys=.*bgp-control-plane"
 
 
 ### Clean-Up
 
 * helm uninstall cilium -n kube-system
-* clab destroy -t n9kv-k8s.clab.yml
+* clab destroy -t n9kv-k8s.clab.yml --cleanup
 * kind delete cluster -n k8s

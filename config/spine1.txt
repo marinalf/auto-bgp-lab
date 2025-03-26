@@ -5,6 +5,8 @@ route-map TAG permit 10
 
   router bgp auto
   router-id auto
+  bestpath as-path multipath-relax
+  maximum-paths
   address-family ipv4 unicast
     redistribute direct route-map TAG
   address-family ipv6 unicast
