@@ -6,11 +6,12 @@ route-map TAG permit 10
   router bgp auto
   router-id auto
   bestpath as-path multipath-relax
-  maximum-paths
   address-family ipv4 unicast
     redistribute direct route-map TAG
+    maximum-paths 64
   address-family ipv6 unicast
     redistribute direct route-map TAG
+    maximum-paths 64
   neighbor ethernet 1/1 - 4 
     remote-as external
     address-family ipv4 unicast
@@ -20,8 +21,8 @@ int mgmt0
 no cdp enable
 
   interface loopback0
-    ip address 10.51.51.51/32 tag 12345
-    ipv6 address 2001::51/128 tag 12345
+    ip address 10.52.52.52/32 tag 12345
+    ipv6 address 2001::52/128 tag 12345
 
   interface ethernet 1/1 - 4
     no switchport

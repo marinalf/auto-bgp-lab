@@ -5,10 +5,17 @@ route-map TAG permit 10
 
   router bgp auto
   router-id auto
+  bestpath as-path multipath-relax
   address-family ipv4 unicast
     redistribute direct route-map TAG
+    maximum-paths 64
+    additional-paths send
+    additional-paths receive
   address-family ipv6 unicast
     redistribute direct route-map TAG
+    maximum-paths 64
+    additional-paths send
+    additional-paths receive
   neighbor ethernet 1/1 - 2
     remote-as external
     address-family ipv4 unicast
@@ -19,13 +26,13 @@ neighbor fe80:10:0:3::2
       route-reflector-client
     address-family ipv6 unicast
       route-reflector-client
-neighbor fe80:10:0:4::2
+neighbor ethernet 1/7
     remote-as internal
     address-family ipv4 unicast
       route-reflector-client
     address-family ipv6 unicast
       route-reflector-client
-        
+
 int mgmt0
 no cdp enable
 

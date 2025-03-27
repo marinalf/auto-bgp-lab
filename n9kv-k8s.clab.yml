@@ -18,7 +18,7 @@
 #
 #
 
-name: n9kv-k8s
+name: n9kv
 
 mgmt:
   network: clab_mgmt_net
@@ -58,7 +58,7 @@ topology:
       mgmt-ipv4: 172.20.1.106
       startup-config: config/spine2.txt
 
-# K8s Nodes (RFC 5549 (peering with IPv6 only)
+# K8s Nodes - RFC 5549 (peering with IPv6 only) - bootstraping being done via eth0 (default)
 
     k8s:
       kind: k8s-kind
@@ -89,6 +89,9 @@ topology:
       exec:
         - ip addr add fe80:10:0:4::2/64 dev eth1
         - ip route add fe80::/64 via fe80:10:0:4::1 dev eth1
+ 
+# NOTE: There is a feature request to support BGP Unnumbered and automatic neighbor discovery with IPv6 RA for the open source version
+# https://github.com/cilium/cilium/issues/22132
 
 # leaf to spine
 

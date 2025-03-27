@@ -1,3 +1,6 @@
+# NOTE: There is a feature request to support BGP Unnumbered and automatic neighbor discovery with IPv6 RA for the open source version
+# https://github.com/cilium/cilium/issues/22132
+
 ---
 apiVersion: cilium.io/v2alpha1
 kind: CiliumBGPClusterConfig
@@ -88,10 +91,9 @@ metadata:
 spec:
   advertisements:
     - advertisementType: "PodCIDR"
-      attributes:
-        communities:
-          wellKnown: [ "no-export" ]
     - advertisementType: "Service"
       service:
         addresses:
+          - ClusterIP
           - ExternalIP
+          - LoadBalancerIP

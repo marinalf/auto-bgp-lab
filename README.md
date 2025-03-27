@@ -100,6 +100,7 @@ show ip bgp summary
 * kubectl cluster-info --context kind-k8s
 * kubectl get node k8s-control-plane -o yaml
 * kubectl get nodes -o wide
+* kubectl get po -o wide
 * kubectl get pods -o wide -n kube-system
 * kubectl get pod -n kube-system -o wide
 * kubectl get pods -A
@@ -112,11 +113,12 @@ show ip bgp summary
 * cilium status
 * cilium config view | grep ipv
 * kubectl get ds -n kube-system cilium
-* kubectl -n kube-system rollout restart ds/cilium
 * cilium bgp peers
 * cilium bgp routes
 * cilium connectivity test
+* cilium bgp routes advertised ipv4 unicast
 * kubectl -n kube-system logs <cilium agent pod name> | grep -E "subsys=.*bgp-control-plane"
+* kubectl -n kube-system rollout restart ds/cilium
 
 
 ### Clean-Up
