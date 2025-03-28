@@ -4,9 +4,9 @@
 For this lab, there are 2 services (red and blue) to be used for testing:
 
 1) The service subnet was defined in the ```cluster.yaml``` file as "10.2.0.0/16,fd00:10:2::/108" 
-2) The service blue has ```internalTrafficPolicy=Local```, so the service IP will only be advertised from nodes with the backend service (single node, replicas set to 1)
-3) The service red has no internal traffic policy, and default will ```Cluster```, so the service IP will be advertised from all nodes (replicas set to 4)
-4) 192.168.100.10/32 and 192.168.200.10/32 are external IPs and will follow the same pattern relying on ```externalTrafficPolicy``` configuration
+2) The service **blue** has internal and external traffic policy set to ```Local```, so the service IP will only be advertised from the node with the backend service (replicas set to 1)
+3) The service **red** does not have traffic policies set, therefore the default setting ```Cluster``` is used and the service IP will be advertised from all nodes (replicas set to 4)
+4) 192.168.100.10/32 and 192.168.200.10/32 are external IPs and will follow the same pattern relying on what is defined for the ```externalTrafficPolicy``` configuration
 
 ### Example
 
@@ -32,7 +32,7 @@ NAME                        READY   STATUS    RESTARTS   AGE   IP            NOD
 curl-blue-64b574954-v72tq   1/1     Running   0          41s   10.244.4.82   k8s-worker2   <none>           <none>
 ```
 
-For the service blue scenario, spines will only see one path for the service IP (10.2.x.x) and external IP (192.168.100.10), so traffic will be localized on a single leaf where the node is hosting the service blue. For the service red scenario, spines will see advertisements from all leaf swiches for service ip (10.2.x.x) and external IP (192.168.200.10), and traffic will be load balanced to the cluster. 
+For the service blue scenario, spines will only see one path for the service IP (10.2.x.x) and external IP (192.168.100.10), so traffic will be localized on a single leaf where the node is hosting the service blue. For the service red scenario, spines will see advertisements from all leaf swiches for service IP (10.2.x.x) and external IP (192.168.200.10), and traffic will be load balanced across the cluster nodes.
 
 **Route Table**
 
