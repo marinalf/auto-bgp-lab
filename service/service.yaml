@@ -1,4 +1,4 @@
-# Apply kubectl apply -f service.yaml
+# Apply kubectl apply -f service/service.yaml
 
 ---
 apiVersion: v1

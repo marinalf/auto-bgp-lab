@@ -34,14 +34,18 @@ neighbor fd00:10:0:0::2
     remote-as internal
     address-family ipv4 unicast
       route-reflector-client
+      next-hop-self
     address-family ipv6 unicast
       route-reflector-client
+      next-hop-self
 neighbor fd00:10:0:1::2
     remote-as internal
     address-family ipv4 unicast
       route-reflector-client
+      next-hop-self
     address-family ipv6 unicast
       route-reflector-client
+      next-hop-self
 
   int mgmt0
   no cdp enable
