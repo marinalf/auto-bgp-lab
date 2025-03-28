@@ -4,10 +4,7 @@ name: k8s
 networking:
   ipFamily: dual
   disableDefaultCNI: true
-#  podSubnet: "10.1.0.0/16,fd00:10:0::/63"
-#  serviceSubnet: "10.2.0.0/16,fd00:10:2::/108"
-#  apiServerAddress: "127.0.0.1"s
-#  apiServerPort: 6443
+  serviceSubnet: "10.2.0.0/16,fd00:10:2::/108"
 nodes:
   - role: control-plane
     extraPortMappings:

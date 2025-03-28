@@ -20,13 +20,13 @@ route-map TAG permit 10
     remote-as external
     address-family ipv4 unicast
     address-family ipv6 unicast
-neighbor fe80:10:0::2
+neighbor fd00:10:0:0::2
     remote-as internal
     address-family ipv4 unicast
       route-reflector-client
     address-family ipv6 unicast
       route-reflector-client
-neighbor fe80:10:0:1::2
+neighbor fd00:10:0:1::2
     remote-as internal
     address-family ipv4 unicast
       route-reflector-client
@@ -50,12 +50,12 @@ neighbor fe80:10:0:1::2
     description cp-node
     no switchport
     ip forward
-    ipv6 link-local fe80:10:0::1
+    ipv6 address fd00:10:0:0::1/64 tag 12345
     no shutdown
 
   interface ethernet 1/7
     description w-node1
     no switchport
     ip forward
-    ipv6 link-local fe80:10:0:1::1
+    ipv6 address fd00:10:0:1::1/64 tag 12345
     no shutdown

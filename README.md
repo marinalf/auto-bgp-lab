@@ -101,7 +101,6 @@ show ip bgp summary
 * kubectl get node k8s-control-plane -o yaml
 * kubectl get nodes -o wide
 * kubectl get po -o wide
-* kubectl get pods -o wide -n kube-system
 * kubectl get pod -n kube-system -o wide
 * kubectl get pods -A
 * kubectl config view
@@ -117,8 +116,9 @@ show ip bgp summary
 * cilium bgp routes
 * cilium connectivity test
 * cilium bgp routes advertised ipv4 unicast
-* kubectl -n kube-system logs <cilium agent pod name> | grep -E "subsys=.*bgp-control-plane"
-* kubectl -n kube-system rollout restart ds/cilium
+* kubectl get namespaces
+* kubectl get services -A
+* kubectl get pods -o wide -n tenant-red
 
 
 ### Clean-Up
