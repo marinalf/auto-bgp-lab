@@ -69,26 +69,31 @@ topology:
       exec:
         - ip addr add fd00:10:0:0::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:0::1 dev eth1
+        - ip -6 route add fd00:100::31/128 via fd00:10:0:0::1 dev eth1 # loopback of leaf1
     k8s-worker:
       kind: ext-container
       exec:
         - ip addr add fd00:10:0:1::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:1::1 dev eth1
+        - ip -6 route add fd00:100::31/128 via fd00:10:0:1::1 dev eth1 # loopback of leaf1
     k8s-worker2:
       kind: ext-container
       exec:
         - ip addr add fd00:10:0:2::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:2::1 dev eth1
+        - ip -6 route add fd00:100::33/128 via fd00:10:0:2::1 dev eth1 # loopback of leaf3
     k8s-worker3:
       kind: ext-container
       exec:
         - ip addr add fd00:10:0:3::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:3::1 dev eth1
+        - ip -6 route add fd00:100::34/128 via fd00:10:0:4::1 dev eth1 # loopback of leaf4
     k8s-worker4:
       kind: ext-container
       exec:
         - ip addr add fd00:10:0:4::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:4::1 dev eth1
+        - ip -6 route add fd00:100::34/128 via fd00:10:0:4::1 dev eth1 # loopback of leaf4
 
 # NOTE: There is a feature request to support BGP Unnumbered and automatic neighbor discovery with IPv6 RA for the open source version
 # https://github.com/cilium/cilium/issues/22132

@@ -26,7 +26,7 @@ route-map TAG permit 10
   
 interface loopback0
   ip address 10.32.32.32/32 tag 12345
-  ipv6 address 2001::32/128 tag 12345
+  ipv6 address fd00:100::32/128 tag 12345
 
   interface ethernet 1/1-2
     no switchport

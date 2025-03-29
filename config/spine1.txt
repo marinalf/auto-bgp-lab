@@ -22,7 +22,7 @@ no cdp enable
 
   interface loopback0
     ip address 10.51.51.51/32 tag 12345
-    ipv6 address 2001::51/128 tag 12345
+    ipv6 address fd00:100::51/128 tag 12345
 
   interface ethernet 1/1 - 4
     no switchport

@@ -30,6 +30,7 @@ route-map k8s-svc-ip-unchange permit 20
     address-family ipv4 unicast
       route-map k8s-svc-ip-unchange out
     address-family ipv6 unicast
+      route-map k8s-svc-ip-unchange out
 neighbor fd00:10:0:3::2
     remote-as internal
     address-family ipv4 unicast
@@ -40,6 +41,7 @@ neighbor fd00:10:0:3::2
       next-hop-self
 neighbor fd00:10:0:4::2
     remote-as internal
+    update-source loopback0
     address-family ipv4 unicast
       route-reflector-client
       next-hop-self
@@ -52,7 +54,7 @@ no cdp enable
 
 interface loopback0
   ip address 10.34.34.34/32 tag 12345
-  ipv6 address 2001::34/128 tag 12345
+  ipv6 address fd00:100::34/128 tag 12345
 
   interface ethernet 1/1-2
     no switchport
