@@ -78,19 +78,21 @@ topology:
 **Cilium CNI**
 
 3) Add helm repo for Cilium: ```helm repo add cilium https://helm.cilium.io```
-4) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```. 
+4) Install Cilium with Helm: ```helm install cilium cilium/cilium --version <your image> --namespace kube-system -f cilium-values.yaml```
 5) Deploy Cilium CLI: ```./cilium-cli.sh```, and ensure file has the right permission [chmod +x ./cilium-cli.sh]
 
-**NOTE**: Before applying the BGP config on Cilium CNI, update the ```cilium-bgp.yaml``` file with the auto-generated AS number from the leaf switches [credentials admin/admin]
+**NOTE**: Before applying the BGP config on Cilium CNI, update the ```cilium-bgp-rackX.yaml``` files with the auto-generated AS number from the leaf switches [credentials admin/admin]
 
 ```
-ssh admin@clab-n9kv-k8s-leaf1
+ssh admin@clab-n9kv-leaf1
 show ip bgp summary
 ```
 
-6) Deploy BGP peering/policies on Cilium CNI: ```kubectl apply -f cilium-bgp.yaml```
+6) Deploy BGP peering/policies on Cilium CNI per rack:
 
-
+ * Rack 1: ```kubectl apply -f cilium-bgp-rack1.yaml```
+ * Rack 2: ```kubectl apply -f cilium-bgp-rack2.yaml```
+ * Rack 3: ```kubectl apply -f cilium-bgp-rack3.yaml```
 
 ### Verification & Troubleshooting Commands
 
