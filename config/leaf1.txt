@@ -2,14 +2,14 @@ feature bgp
 
 route-map TAG permit 10
   match tag 12345 
+  
+ip prefix-list advertise-multipath seq 10 permit 192.168.200.10/32 
 
-  ip prefix-list k8s-svc-ip seq 10 permit 192.168.200.0/24 le 32
-
-route-map k8s-svc-ip-unchange permit 10
-  match ip address prefix-list k8s-svc-ip 
+route-map advertise-multipath permit 10
+  match ip address prefix-list advertise-multipath 
   set ip next-hop unchanged
   set path-selection multipaths advertise
-route-map k8s-svc-ip-unchange permit 20
+route-map advertise-multipath permit 20
 
   router bgp auto
   router-id auto
@@ -19,7 +19,7 @@ route-map k8s-svc-ip-unchange permit 20
     maximum-paths 64
     additional-paths send
     additional-paths receive
-  additional-paths selection route-map k8s-svc-ip-unchange
+    additional-paths selection route-map advertise-multipath
   address-family ipv6 unicast
     redistribute direct route-map TAG
     maximum-paths 64
@@ -28,9 +28,9 @@ route-map k8s-svc-ip-unchange permit 20
  neighbor Ethernet1/1-2
     remote-as external
     address-family ipv4 unicast
-      route-map k8s-svc-ip-unchange out
+    capability additional-paths send
+    route-map advertise-multipath out
     address-family ipv6 unicast
-      route-map k8s-svc-ip-unchange out
 neighbor fd00:10:0:0::2
     remote-as internal
     address-family ipv4 unicast

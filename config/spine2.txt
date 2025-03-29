@@ -9,12 +9,17 @@ route-map TAG permit 10
   address-family ipv4 unicast
     redistribute direct route-map TAG
     maximum-paths 64
+    additional-paths send
+    additional-paths receive
   address-family ipv6 unicast
     redistribute direct route-map TAG
     maximum-paths 64
+    additional-paths send
+    additional-paths receive
   neighbor ethernet 1/1 - 4 
     remote-as external
     address-family ipv4 unicast
+      capability additional-paths receive
     address-family ipv6 unicast
         
 int mgmt0

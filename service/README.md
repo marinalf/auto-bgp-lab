@@ -52,4 +52,4 @@ spine1# sh ip route bgp
     *via fe80::ecb:9ff:fe00:101%default, Eth1/1, [20/0], 00:12:10, bgp-auto, external, tag 4237290796
 ```
 
-The spines are configured with ```bestpath as-path multipath-relax``` and ```maximum-paths``` to allow for BGP load balancing based on leaf next hop. For optimized load balancing based on node next hop, leafs can be configured with ```set ipv6 nexthop unchanged``` and ```set path-selection multipaths advertise``` within a route-map matching the ip prefix pointing to the service and external IPs. 
+Leaf and spines are configured with ```bestpath as-path multipath-relax``` and ```maximum-paths``` to allow for additional paths and BGP load balancing based on leaf next hop. 

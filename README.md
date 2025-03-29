@@ -94,6 +94,10 @@ show ip bgp summary
  * Rack 2: ```kubectl apply -f cilium-bgp-rack2.yaml```
  * Rack 3: ```kubectl apply -f cilium-bgp-rack3.yaml```
 
+**Services**
+
+7) Deploy services for testing ```kubectl apply -f service/service.yaml```
+
 ### Verification & Troubleshooting Commands
 
 * clab inspect -t n9kv-k8s.clab.yml
