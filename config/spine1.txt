@@ -20,6 +20,7 @@ route-map TAG permit 10
     remote-as external
     address-family ipv4 unicast
       capability additional-paths receive
+      soft-reconfiguration inbound always
     address-family ipv6 unicast
         
 int mgmt0
