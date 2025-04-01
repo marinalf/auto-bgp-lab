@@ -4,12 +4,19 @@ route-map TAG permit 10
   match tag 12345 
 
 ip prefix-list k8s-svc-ip seq 10 permit 192.168.200.10/32 
+ipv6 prefix-list k8s-svc-ipv6 seq 10 permit 2001:192:168:200::10/128 
 
 route-map multipath-nh-unchanged permit 10
   match ip address prefix-list k8s-svc-ip
   set ipv6 next-hop unchanged
-  set path-selection multipaths advertise
+  set path-selection all advertise
 route-map multipath-nh-unchanged permit 20
+
+route-map multipath-nh-unchanged-v6 permit 10
+  match ipv6 address prefix-list k8s-svc-ipv6
+  set ipv6 next-hop unchanged
+  set path-selection all advertise
+route-map multipath-nh-unchanged-v6 permit 20
 
   router bgp auto
   router-id auto
@@ -25,12 +32,13 @@ route-map multipath-nh-unchanged permit 20
     maximum-paths 64
     additional-paths send
     additional-paths receive
+    additional-paths selection route-map multipath-nh-unchanged-v6
  neighbor Ethernet1/1-2
     remote-as external
     address-family ipv4 unicast
-    capability additional-paths send
-    route-map multipath-nh-unchanged out
+      route-map multipath-nh-unchanged out
     address-family ipv6 unicast
+      route-map multipath-nh-unchanged-v6 out
 neighbor fd00:10:0:2::2
     remote-as internal
     address-family ipv4 unicast

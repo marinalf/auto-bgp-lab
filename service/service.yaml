@@ -28,7 +28,8 @@ spec:
   selector:
     app: curl-blue
   externalIPs:
-    - 192.168.100.10
+    - 192.168.100.10   
+    - 2001:192:168:100::10
   externalTrafficPolicy: Local
   internalTrafficPolicy: Local
 
@@ -49,6 +50,7 @@ spec:
     app: curl-red
   externalIPs:
     - 192.168.200.10
+    - 2001:192:168:200::10
 
 ---
 apiVersion: apps/v1

@@ -126,6 +126,7 @@ show ip bgp summary
 * kubectl get services -A
 * kubectl get pods -o wide -n tenant-red
 * cilium bgp routes advertised ipv4 unicast 
+* kubectl -n kube-system exec ds/cilium -- cilium service list
 
 
 ### Clean-Up

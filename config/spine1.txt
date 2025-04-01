@@ -22,6 +22,8 @@ route-map TAG permit 10
       capability additional-paths receive
       soft-reconfiguration inbound always
     address-family ipv6 unicast
+      capability additional-paths receive
+      soft-reconfiguration inbound always
         
 int mgmt0
 no cdp enable
