@@ -12,13 +12,13 @@ For this lab, there are 2 services (red and blue) to be used for testing:
 
 ```
 $ kubectl get services -A
-NAMESPACE     NAME           TYPE        CLUSTER-IP     EXTERNAL-IP      PORT(S)                  AGE
-default       kubernetes     ClusterIP   10.2.0.1       <none>           443/TCP                  26m
-kube-system   cilium-envoy   ClusterIP   None           <none>           9964/TCP                 24m
-kube-system   hubble-peer    ClusterIP   10.2.127.243   <none>           443/TCP                  24m
-kube-system   kube-dns       ClusterIP   10.2.0.10      <none>           53/UDP,53/TCP,9153/TCP   26m
-tenant-blue   service-blue   NodePort    10.2.182.126   192.168.100.10   1234:32744/TCP           15s
-tenant-red    service-red    NodePort    10.2.198.222   192.168.200.10   1236:30286/TCP           15s
+NAMESPACE     NAME           TYPE        CLUSTER-IP    EXTERNAL-IP                           PORT(S)                  AGE
+default       kubernetes     ClusterIP   10.2.0.1      <none>                                443/TCP                  2d2h
+kube-system   cilium-envoy   ClusterIP   None          <none>                                9964/TCP                 2d2h
+kube-system   hubble-peer    ClusterIP   10.2.46.54    <none>                                443/TCP                  2d2h
+kube-system   kube-dns       ClusterIP   10.2.0.10     <none>                                53/UDP,53/TCP,9153/TCP   2d2h
+tenant-blue   service-blue   NodePort    10.2.215.58   192.168.100.10,2001:192:168:100::10   1234:32688/TCP           2d1h
+tenant-red    service-red    NodePort    10.2.199.40   192.168.200.10,2001:192:168:200::10   1236:31124/TCP           2d1h
 
 $ kubectl get pods -o wide -n tenant-red
 NAME                       READY   STATUS    RESTARTS   AGE   IP             NODE          NOMINATED NODE   READINESS GATES
@@ -52,4 +52,4 @@ spine1# sh ip route bgp
     *via fe80::ecb:9ff:fe00:101%default, Eth1/1, [20/0], 00:12:10, bgp-auto, external, tag 4237290796
 ```
 
-Leaf and spines are configured with ```bestpath as-path multipath-relax``` and ```maximum-paths``` to allow for additional paths and BGP load balancing based on leaf next hop. 
+Leaf and spines are configured with ```bestpath as-path multipath-relax``` and ```maximum-paths``` to allow for additional paths and BGP load balancing based on leaf next hop. Additional configuration can be applied to allow for node next hop load balancing when there is an unbalanced number of nodes across different racks. 
