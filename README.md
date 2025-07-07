@@ -134,3 +134,7 @@ show ip bgp summary
 * helm uninstall cilium -n kube-system
 * clab destroy -t n9kv-k8s.clab.yml --cleanup
 * kind delete cluster -n k8s
+
+### Diagram
+
+![High Level Diagram](config/diagram.png)
