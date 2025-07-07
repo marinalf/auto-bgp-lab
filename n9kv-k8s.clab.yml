@@ -87,7 +87,7 @@ topology:
       exec:
         - ip addr add fd00:10:0:3::2/64 dev eth1
         - ip route add fd00::/16 via fd00:10:0:3::1 dev eth1
-        - ip -6 route add fd00:100::34/128 via fd00:10:0:4::1 dev eth1 # loopback of leaf4
+        - ip -6 route add fd00:100::34/128 via fd00:10:0:3::1 dev eth1 # loopback of leaf4
     k8s-worker4:
       kind: ext-container
       exec:
